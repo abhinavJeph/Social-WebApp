@@ -9,6 +9,5 @@ app.listen(PORT, (err) => {
     console.log(`Error in loading the server : ${err}`);
     return;
   }
-
   console.log(`Server is up and running on PORT : ${PORT}`);
 });
