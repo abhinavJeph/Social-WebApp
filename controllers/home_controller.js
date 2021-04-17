@@ -1,5 +1,5 @@
 module.exports.home = function (req, res) {
-  return res.render("../views/home.ejs", {
+  return res.render("home", {
     title: "Home",
   });
 };
