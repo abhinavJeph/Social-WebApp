@@ -1,6 +1,7 @@
 const express = require("express");
 const PORT = process.env.PORT || 8000;
 const expressEjsLayouts = require("express-ejs-layouts");
+const db = require("./config/mongoose");
 const app = express();
 
 // use static files from assets
