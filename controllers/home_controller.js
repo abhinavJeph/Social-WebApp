@@ -1,5 +1,7 @@
 module.exports.home = function (req, res) {
-  return res.send("<h1>Welcome to Social Site</h1>");
+  return res.render("../views/home.ejs", {
+    title: "Home",
+  });
 };
 
 //module.exports.actionName = function(req, res){}
