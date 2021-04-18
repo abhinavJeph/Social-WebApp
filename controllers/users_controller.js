@@ -35,6 +35,11 @@ module.exports.signIn = function (req, res) {
   });
 };
 
+module.exports.signOut = function (req, res) {
+  res.clearCookie(req.cookie);
+  res.redirect("/users/sign-in");
+};
+
 module.exports.create = function (req, res) {
   if (req.body.password != req.body.confirmPassword) {
     console.log(req.body.password + " and " + req.body.confirmPassword);
