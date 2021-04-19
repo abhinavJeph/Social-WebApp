@@ -53,12 +53,19 @@ passport.checkAuthentication = function (req, res, next) {
   return res.redirect("/users/sign-in");
 };
 
+passport.alreadyLogedIn = function (req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect("/");
+  }
+  return next();
+};
+
 passport.sentAuthenticatedUser = function (req, res, next) {
   if (req.isAuthenticated()) {
     // req.user contains the current signed in user from the session cookie and we are sending this to the locals for views
     res.locals.user = req.user;
-    next();
   }
+  next();
 };
 
 module.exports = passport;
