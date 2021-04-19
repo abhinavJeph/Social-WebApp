@@ -26,13 +26,11 @@ module.exports.create = function (req, res) {
     console.log("Password did not match");
     return res.redirect("back");
   }
-
   User.findOne({ emial: req.body.email }, function (err, user) {
     if (err) {
       console.log("Error in finding the user in signing up");
       return;
     }
-
     if (!user) {
       User.create(req.body, function (err, user) {
         if (err) {
@@ -49,5 +47,5 @@ module.exports.create = function (req, res) {
 };
 
 module.exports.createSession = function (req, res) {
-  // TODO later
+  return res.redirect("/users/profile");
 };
