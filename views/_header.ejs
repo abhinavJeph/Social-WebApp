@@ -1,24 +1,23 @@
-<header>
-  Page Header
-
-  <ul>
+<header id="header">
+  <h1><i class="fas fa-heart fa-sm"></i> getSocial</h1>
+  <div id="link-container">
     <% if (locals.user){ %>
-    <li>
+    <div class="link-btn">
       <a href="/users/profile"> <%= user.name %> </a>
-    </li>
-    <li>
+    </div>
+    <div class="link-btn">
       <a href="/users/sign-out">Sign Out</a>
-    </li>
+    </div>
     <% }else{ %>
 
-    <li>
+    <div class="link-btn">
       <a href="/users/sign-in">Sign In</a>
-    </li>
+    </div>
 
-    <li>
+    <div class="link-btn">
       <a href="/users/sign-up">Sign Up</a>
-    </li>
+    </div>
 
     <% } %>
-  </ul>
+  </div>
 </header>

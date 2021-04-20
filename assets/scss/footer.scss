@@ -1,0 +1,25 @@
+#footer {
+  display: flex;
+  align-items: center;
+  background-color: #f90;
+  color: #000;
+  padding: 0.2rem 0.6rem;
+
+  #link-container {
+    margin: 0.2rem 0.6rem;
+    display: flex;
+    .link-btn {
+      background-color: #000;
+      margin: 0.25rem;
+      padding: 0.3rem 0.5rem;
+      border: none;
+      border: 1px solid transparent;
+      border-radius: 0.25rem;
+      max-width: 7em;
+      a {
+        color: #f90;
+        text-decoration: none;
+      }
+    }
+  }
+}
