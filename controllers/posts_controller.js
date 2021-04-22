@@ -1,8 +1,5 @@
 const Post = require("../models/post");
 
-module.exports.posts = function (req, res) {
-  return res.send("<h1>Posts</h1>");
-};
 
 module.exports.create = function (req, res) {
   Post.create(
