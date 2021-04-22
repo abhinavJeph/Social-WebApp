@@ -14,49 +14,7 @@
 
   <div id="posts-list-container">
     <ul>
-      <% for(post of posts){%>
-      <li>
-        <p>
-          <%if(locals.user && locals.user.id == post.user.id){%>
-            <small>
-              <a href="/posts/destroy/<%= post.id%>">X</a>
-            </small>
-          <%}%>
-          <%= post.content%>
-          <br />
-          <small><%= post.user.name%></small>
-        </p>
-        <div class="post-comment">
-          <%if(locals.user){%>
-            <form action="/comments/create" method="POST">
-              <input type="text" name = "content" placeholder="Enter your comment here...">
-              <input type="hidden" name = "post" value= "<%= post._id%>">
-              <input type="submit" value="Add Comment">
-            </form>
-          <%}%>
-        </div>
-        <div class="post-comments-list">
-          <ul class="post-comments-<%= post._id%>">
-           <% for(comment of post.comments){%>
-            <li>
-              <p>
-                <%if(locals.user && locals.user.id == comment.user.id){%>
-                  <small>
-                    <a href="/comments/destroy/<%= comment.id%>">X</a>
-                  </small>
-                <%}%>
-                <%= comment.content%>;
-                <br>
-                <small>
-                  <%= comment.user.name%>
-                </small>
-              </li>
-            </p>
-            <%}%>
-          </ul>
-        </div>
-      </p>
-      <%}%>
+      <% for(post of posts){%> <%-include('_post.ejs')-%> <%}%>
     </ul>
   </div>
 </section>
