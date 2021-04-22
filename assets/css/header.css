@@ -9,6 +9,11 @@
 
 #header h1 {
   margin: 0;
+  cursor: pointer;
+}
+
+#header h1:hover i {
+  color: #ff0505d7;
 }
 
 #header #link-container {
