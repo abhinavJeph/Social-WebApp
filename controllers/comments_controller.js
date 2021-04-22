@@ -3,10 +3,10 @@ const Post = require("../models/post");
 
 module.exports.create = function (req, res) {
   Post.findById(req.body.post, function (err, post) {
-    // if (err) {
-    //   console.log("Could not find Post of this comment");
-    //   return res.redirect("/");
-    // }
+    if (err) {
+      console.log("Could not find Post of this comment");
+      return res.redirect("/");
+    }
 
     Comment.create(
       {
