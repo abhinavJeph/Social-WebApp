@@ -17,7 +17,7 @@ module.exports.create = async function (req, res) {
     req.flash("success", "Comment Created!");
     res.redirect("/");
   } catch (err) {
-    req.flash("error", err);
+    req.flash("error", err.message);
     res.redirect("/");
   }
 };
@@ -41,7 +41,7 @@ module.exports.destroy = async function (req, res) {
       return res.redirect("back");
     }
   } catch (err) {
-    req.flash("error", err);
+    req.flash("error", err.message);
     return res.redirect("back");
   }
 };

@@ -47,14 +47,14 @@ module.exports.create = function (req, res) {
 
   User.findOne({ email: req.body.email }, function (err, user) {
     if (err) {
-      req.flash("error", err);
+      req.flash("error", err.message);
       return res.redirect("back");
     }
 
     if (!user) {
       User.create(req.body, function (err, user) {
         if (err) {
-          req.flash("error", err);
+          req.flash("error", err.message);
           return res.redirect("back");
         }
         req.flash("Success", "Signed Up Successfully!");
