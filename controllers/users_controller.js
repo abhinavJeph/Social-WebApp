@@ -15,11 +15,13 @@ module.exports.update = function (req, res) {
       req.params.id,
       req.body,
       function (err, updatedUser) {
+        req.flash("success", "Profile Updated Successfully");
         return res.redirect("back");
       }
     );
   } else {
-    return res.status(401).send("Unautherized");
+    req.flash("error", "You Are Not Authorized");
+    return res.redirect("back");
   }
 };
 
@@ -45,20 +47,21 @@ module.exports.create = function (req, res) {
 
   User.findOne({ email: req.body.email }, function (err, user) {
     if (err) {
-      console.log("error in finding user in signing up");
-      return;
+      req.flash("error", err);
+      return res.redirect("back");
     }
 
     if (!user) {
       User.create(req.body, function (err, user) {
         if (err) {
-          console.log("error in creating user while signing up");
-          return;
+          req.flash("error", err);
+          return res.redirect("back");
         }
-
+        req.flash("Success", "Signed Up Successfully!");
         return res.redirect("/users/sign-in");
       });
     } else {
+      req.flash("error", "User Already Present");
       return res.redirect("back");
     }
   });
