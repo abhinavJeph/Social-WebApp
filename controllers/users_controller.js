@@ -1,3 +1,4 @@
+const { find, findById } = require("../models/user");
 const User = require("../models/user");
 
 module.exports.profile = function (req, res) {
@@ -9,16 +10,48 @@ module.exports.profile = function (req, res) {
   });
 };
 
-module.exports.update = function (req, res) {
+module.exports.update = async function (req, res) {
+  // if (req.user.id == req.params.id) {
+  //   User.findByIdAndUpdate(
+  //     req.params.id,
+  //     req.body,
+  //     function (err, updatedUser) {
+  //       req.flash("success", "Profile Updated Successfully");
+  //       return res.redirect("back");
+  //     }
+  //   );
+  // } else {
+  //   req.flash("error", "You Are Not Authorized");
+  //   return res.redirect("back");
+  // }
+
   if (req.user.id == req.params.id) {
-    User.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      function (err, updatedUser) {
-        req.flash("success", "Profile Updated Successfully");
-        return res.redirect("back");
-      }
-    );
+    try {
+      let user = await User.findById(req.params.id);
+
+      User.uploadedAvatar(req, res, function (err) {
+        if (err) {
+          console.log("Error in multer:" + err);
+        }
+        //Multer adds a body object and file object to the request object.
+        //body object contains the values of the text fields of the form.
+        //file object contains the files uploaded via the form.
+        user.name = req.body.name;
+        user.email = req.body.email;
+
+        if (req.file) {
+          //saving the path of uploaded file in avatar field of user
+          user.avatar = User.avatarPath + "/" + req.file.filename;
+        }
+      });
+      user.save();
+
+      req.flash("success", "Profile Updated Successfully");
+      return res.redirect("back");
+    } catch (err) {
+      req.flash("error", err.message);
+      return res.redirect("back");
+    }
   } else {
     req.flash("error", "You Are Not Authorized");
     return res.redirect("back");
