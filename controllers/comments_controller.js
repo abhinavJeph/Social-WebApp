@@ -13,8 +13,20 @@ module.exports.create = async function (req, res) {
       });
       post.comments.push(comment);
       post.save();
+
+      if (req.xhr) {
+        comment = await comment.populate("user", "name").execPopulate();
+        return res.status(200).json({
+          data: {
+            comment,
+          },
+          message: "Comment Created!",
+        });
+      }
+
+      req.flash("success", "Comment Created!");
     }
-    req.flash("success", "Comment Created!");
+
     res.redirect("/");
   } catch (err) {
     req.flash("error", err.message);
@@ -33,6 +45,15 @@ module.exports.destroy = async function (req, res) {
         $pull: { comments: req.params.id },
       });
       comment.remove();
+
+      if (req.xhr) {
+        return res.status(200).json({
+          data: {
+            comment_Id: req.params.id,
+          },
+          message: "Comment Deleted!",
+        });
+      }
 
       req.flash("success", "Comment Deleted!");
       return res.redirect("back");
