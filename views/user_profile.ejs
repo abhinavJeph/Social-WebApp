@@ -1,9 +1,14 @@
 <link rel="stylesheet" href="/css/user_profile.css" />
-<h1><%= title %></h1>
 
+<img
+  src="<%= profile_user.avatar %>"
+  alt="<%= profile_user.name%>"
+  width="100"
+/>
 <p><%= profile_user.name %></p>
 <p><%= profile_user.email %></p>
 
+<!-- locals.user contains current logged in user  -->
 <!-- If user matches with current user show the update form  -->
 <%if(profile_user.id == user.id){%>
 <div>
