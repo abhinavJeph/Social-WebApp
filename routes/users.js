@@ -29,4 +29,17 @@ router.post(
 
 router.get("/sign-out", usersController.destroySession);
 
+//sending request to google for user's info
+router.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+//this is callback url where google send the info
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/users/sign-in" }),
+  usersController.createSession
+);
+
 module.exports = router;

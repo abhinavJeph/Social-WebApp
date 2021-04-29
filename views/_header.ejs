@@ -3,7 +3,9 @@
   <div id="link-container">
     <% if (locals.user){ %>
     <div class="link-btn">
-      <a href="/users/profile/<%= user.id %>"> <%= user.name %> </a>
+      <a href="/users/profile/<%= user.id %>">
+        <%= user.name.split(" ")[0] %>
+      </a>
     </div>
     <div class="link-btn">
       <a href="/users/sign-out">Sign Out</a>
