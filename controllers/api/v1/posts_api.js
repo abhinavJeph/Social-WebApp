@@ -13,25 +13,18 @@ module.exports.destroy = async function (req, res) {
   try {
     let post = await Post.findById(req.params.id);
     // .id means converting the object _id into string
-    //   if (post.user == req.user.id) {
-    post.remove();
+    if (post.user == req.user.id) {
+      post.remove();
+      await Comment.deleteMany({ post: req.params.id });
 
-    // if (req.xhr) {
-    //   return res.status(200).json({
-    //     data: {
-    //       post_id: req.params.id,
-    //     },
-    //     message: "Post Deleted",
-    //   });
-    // }
-    await Comment.deleteMany({ post: req.params.id });
-
-    return res.json(200, {
-      message: "Post Deleted!",
-    });
-    //   } else {
-    //     return res.redirect("back");
-    //   }
+      return res.json(200, {
+        message: "Post Deleted!",
+      });
+    } else {
+      return res.json(401, {
+        message: "You Can Not Delete This Post",
+      });
+    }
   } catch (err) {
     console.log(err);
     return res.json(500, {
