@@ -22,6 +22,12 @@ const userSchema = new mongoose.Schema(
     avatar: {
       type: String,
     },
+    friendships: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Friendship",
+      },
+    ],
   },
   {
     //to add a feature of 'created at' and 'updated at'.
