@@ -32,7 +32,15 @@ class PostComments {
           // Deletion by ajax
           pSelf.deleteComentDom($(` .delete-comment-button`, newComment));
 
-          callNoty("success", data.message);
+          // CHANGE :: enable the functionality of the toggle like button on the new comment
+          new ToggleLike($(" .toggle-like-button", newComment));
+          new Noty({
+            theme: "relax",
+            text: "Comment published!",
+            type: "success",
+            layout: "topRight",
+            timeout: 1500,
+          }).show();
         },
         error: function (error) {
           callNoty("error", error.responseText);
@@ -54,6 +62,13 @@ class PostComments {
                             <br>
                             <small>
                                 ${comment.user.name}
+                            </small>
+                            <small>
+                            
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment">
+                                    0 Likes
+                                </a>
+                            
                             </small>
                         </p>    
 
